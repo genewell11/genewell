@@ -429,6 +429,9 @@
   },
   "devDependencies": {},
   "scripts": {
+    "build": "cd genewell4 && npm install --legacy-peer-deps && npm run build",
+    "start": "cd genewell4 && node dist/server/node-build.mjs",
+    "dev": "cd genewell4 && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
