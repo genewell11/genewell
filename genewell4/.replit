@@ -41,7 +41,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "bash django_wellness/manage_server.sh"
+args = "bash genewell4_fixed/django_wellness/manage_server.sh"
 waitForPort = 8000
 
 [workflows.workflow.metadata]
