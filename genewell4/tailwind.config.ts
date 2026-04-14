@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./client/**/*.{ts,tsx}"],
+  content: ["./genewell4_fixed/client/**/*.{ts,tsx}"],
   prefix: "",
   safelist: [
     {

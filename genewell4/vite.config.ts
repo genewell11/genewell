@@ -1,7 +1,7 @@
 import { defineConfig, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { createServer } from "./server";
+import { createServer } from "./genewell4_fixed/server";
 
 export default defineConfig(({ mode }) => ({
   server: {
@@ -18,9 +18,10 @@ export default defineConfig(({ mode }) => ({
   plugins: [react(), mode === 'development' && expressPlugin()].filter(Boolean) as Plugin[],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./client"),
-      "@shared": path.resolve(__dirname, "./shared"),
+      "@": path.resolve(__dirname, "./genewell4_fixed/client"),
+      "@shared": path.resolve(__dirname, "./genewell4_fixed/shared"),
     },
+    dedupe: ["react", "react-dom"],
   },
 }));
 
