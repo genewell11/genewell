@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "description": "Genewell Addon Gender Filtering Rules",
+
+  "gender_restrictions": {
+    "male": {
+      "hide": ["addon_women_hormone", "addon_women_hormonal"],
+      "show": ["addon_dna", "addon_supplement", "addon_athlete", "addon_family", "addon_men_fitness", "addon_products"],
+      "reason": "Women's Hormonal Health content (PCOS, menstrual cycle, estrogen protocols) is not applicable for male profiles."
+    },
+    "female": {
+      "hide": ["addon_men_fitness"],
+      "show": ["addon_dna", "addon_supplement", "addon_athlete", "addon_family", "addon_women_hormone", "addon_products"],
+      "reason": "Men's Fitness Performance Pack (testosterone optimization, male-specific protocols) is not applicable for female profiles."
+    },
+    "other": {
+      "hide": [],
+      "show": "all",
+      "reason": "All addons available for non-binary profiles."
+    },
+    "non-binary": {
+      "hide": [],
+      "show": "all",
+      "reason": "All addons available for non-binary profiles."
+    }
+  },
+
+  "addon_definitions": {
+    "addon_dna": {
+      "id": "addon_dna",
+      "name": "DNA & Genetics Pack",
+      "gender_applicable": ["male", "female", "other", "non-binary"],
+      "description": "Gene-to-action decision engine (MTHFR, CYP1A2, ACTN3, FTO)"
+    },
+    "addon_supplement": {
+      "id": "addon_supplement",
+      "name": "Advanced Supplement Protocol",
+      "gender_applicable": ["male", "female", "other", "non-binary"],
+      "description": "12-week phased cycling + stacking logic"
+    },
+    "addon_athlete": {
+      "id": "addon_athlete",
+      "name": "Athletic Performance Pack",
+      "gender_applicable": ["male", "female", "other", "non-binary"],
+      "description": "Periodization + sport nutrition + recovery science"
+    },
+    "addon_family": {
+      "id": "addon_family",
+      "name": "Family Wellness Plan",
+      "gender_applicable": ["male", "female", "other", "non-binary"],
+      "description": "Age-group wellness protocols for the whole family"
+    },
+    "addon_women_hormone": {
+      "id": "addon_women_hormone",
+      "name": "Women's Hormonal Health",
+      "gender_applicable": ["female", "other", "non-binary"],
+      "description": "PCOS, menstrual cycle nutrition, hormonal balance"
+    },
+    "addon_men_fitness": {
+      "id": "addon_men_fitness",
+      "name": "Men's Performance Pack",
+      "gender_applicable": ["male", "other", "non-binary"],
+      "description": "Testosterone optimization, male-specific training protocols"
+    },
+    "addon_products": {
+      "id": "addon_products",
+      "name": "Product Recommendations",
+      "gender_applicable": ["male", "female", "other", "non-binary"],
+      "description": "Curated supplement and product recommendations"
+    }
+  },
+
+  "validation_rules": [
+    {
+      "if_gender": "male",
+      "reject_addons": ["addon_women_hormone", "addon_women_hormonal"],
+      "error_code": "GENDER_ADDON_MISMATCH",
+      "message": "Women's Hormonal Health add-on cannot be purchased for a male profile."
+    },
+    {
+      "if_gender": "female",
+      "reject_addons": ["addon_men_fitness"],
+      "error_code": "GENDER_ADDON_MISMATCH",
+      "message": "Men's Performance Pack add-on cannot be purchased for a female profile."
+    }
+  ]
+}

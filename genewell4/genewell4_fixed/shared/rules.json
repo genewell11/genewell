@@ -1,0 +1,179 @@
+{
+  "version": "1.0.0",
+  "description": "Genewell Global Rule Engine — Declarative Configuration",
+
+  "calorie_logic": [
+    {
+      "id": "gain_weight_surplus",
+      "condition": "goal includes 'gain-weight' OR goal includes 'gain_weight' OR goal includes 'muscle'",
+      "action": "calorie_surplus",
+      "params": { "minSurplus": 200, "maxSurplus": 300 },
+      "note": "Calorie target = TDEE + 200–300 kcal. Focus: lean muscle gain, NOT fat restriction.",
+      "bannerText": "GOAL CORRECTION: Your quiz states 'gain-weight'. All calorie guidance below is a SURPLUS above TDEE — not a deficit."
+    },
+    {
+      "id": "fat_loss_deficit",
+      "condition": "goal includes 'fat-loss' OR goal includes 'weight-loss' OR goal includes 'lose'",
+      "action": "calorie_deficit",
+      "params": { "minDeficit": 400, "maxDeficit": 500 },
+      "note": "400–500 kcal deficit = 0.4–0.5 kg fat loss per week — optimal muscle-preserving rate."
+    },
+    {
+      "id": "wellness_maintenance",
+      "condition": "default",
+      "action": "calorie_maintenance",
+      "params": { "minAdd": 100, "maxAdd": 200 },
+      "note": "100–200 kcal above TDEE supports gradual recomposition."
+    }
+  ],
+
+  "sleep_rules": [
+    {
+      "id": "critical_sleep",
+      "condition": "sleepHours <= 5 OR sleepScore < 35",
+      "severity": "critical",
+      "priority_block": true,
+      "action": "add_sleep_priority_action",
+      "recommendations": [
+        "Lock Your Wake-Sleep Schedule — extend bedtime backward, not forward",
+        "Magnesium bisglycinate 300–400mg at bedtime",
+        "Cut ALL caffeine after 12 PM (not 2 PM)",
+        "Dark, cool room (18–20°C)",
+        "No screens 60 min before bed"
+      ],
+      "bannerText": "SLEEP CRITICAL: Sleep deprivation at 3–5 hrs triggers high cortisol, thyroid suppression, and metabolic slowdown cascade."
+    },
+    {
+      "id": "poor_sleep",
+      "condition": "sleepHours <= 6 OR sleepScore < 55",
+      "severity": "high",
+      "priority_block": false,
+      "action": "add_sleep_section",
+      "recommendations": [
+        "Target 7–8 hours with consistent wake time",
+        "Magnesium bisglycinate 300mg at bedtime",
+        "Cut caffeine after 2 PM",
+        "10-min wind-down routine (no blue light)"
+      ]
+    }
+  ],
+
+  "meal_frequency_rules": [
+    {
+      "id": "low_meal_frequency",
+      "condition": "mealFrequency <= 2",
+      "action": "add_snack_section",
+      "snacks": [
+        {
+          "timing": "Mid-morning (10:30–11 AM)",
+          "calories": "300–400 kcal",
+          "examples": "Boiled eggs (2) + roasted makhana OR peanut chaat + oat milk smoothie"
+        },
+        {
+          "timing": "Evening (4–5 PM)",
+          "calories": "200–300 kcal",
+          "examples": "Sweet potato chaat + Brazil nut (1) OR sprout chaat + coconut yogurt"
+        }
+      ],
+      "bannerText": "MEAL FREQUENCY: You eat {mealFrequency} meals/day. At your calorie target of {calorieTarget} kcal, this is physically very difficult without snacks."
+    }
+  ],
+
+  "hydration_rules": [
+    {
+      "id": "low_hydration",
+      "condition": "waterLiters < 1.5 OR hydrationGlasses < 6",
+      "severity": "moderate",
+      "action": "add_hydration_correction",
+      "targets": {
+        "female_under_50_kg": "2.0L (8 glasses)",
+        "female_50_to_70_kg": "2.3L (9 glasses)",
+        "female_over_70_kg": "2.5L (10 glasses)",
+        "male_under_60_kg": "2.5L (10 glasses)",
+        "male_60_to_80_kg": "2.8L (11 glasses)",
+        "male_over_80_kg": "3.2L (13 glasses)"
+      },
+      "note": "Hydration affects thyroid function, cortisol levels, and skin health."
+    }
+  ],
+
+  "thyroid_rules": [
+    {
+      "id": "thyroid_detected",
+      "condition": "medicalConditions includes 'thyroid'",
+      "action": "add_thyroid_protocol",
+      "lab_tests": [
+        "TSH + Free T3 + Free T4 (BEFORE starting any supplements)",
+        "Anti-TPO + Anti-TG (autoimmune thyroid panel)",
+        "Selenium levels (if available)"
+      ],
+      "supplement_warnings": [
+        "WARNING: Ashwagandha modulates thyroid — check with doctor before use",
+        "WARNING: Iodine supplements can worsen Hashimoto's — test first",
+        "SAFE: Selenium 200mcg/day supports T4→T3 conversion",
+        "SAFE: Zinc 25mg with food supports thyroid hormone synthesis"
+      ],
+      "food_avoid": ["Excessive raw cruciferous vegetables (kale, broccoli, cauliflower) — steam them instead"],
+      "food_include": ["Brazil nuts (1/day for selenium)", "Pumpkin seeds for zinc", "Iodized salt"],
+      "bannerText": "THYROID DETECTED: Sleep deprivation suppresses TSH. Get baseline bloodwork BEFORE Week 1 supplements."
+    }
+  ],
+
+  "dietary_restriction_rules": [
+    {
+      "id": "gluten_intolerance",
+      "condition": "foodIntolerances includes 'gluten'",
+      "action": "remove_gluten_globally",
+      "remove_items": ["wheat", "roti", "bread", "maida", "semolina", "rava", "pasta", "naan", "paratha"],
+      "replace_with": ["rice roti", "jowar roti", "bajra roti", "rice", "quinoa", "millet", "gluten-free oats"],
+      "bannerText": "GLUTEN-FREE ACTIVE: All wheat, roti, bread, maida, and semolina replaced throughout this report."
+    },
+    {
+      "id": "lactose_intolerance",
+      "condition": "foodIntolerances includes 'lactose' OR foodIntolerances includes 'dairy'",
+      "action": "remove_dairy_globally",
+      "remove_items": ["milk", "paneer", "curd", "dahi", "cheese", "butter", "ghee*", "cream", "yogurt", "whey"],
+      "replace_with": {
+        "milk": "oat milk / soy milk / almond milk",
+        "paneer": "tofu / soya chunks",
+        "curd": "coconut yogurt / soy yogurt",
+        "yogurt": "coconut yogurt",
+        "whey protein": "plant-based protein / pea protein"
+      },
+      "exceptions": ["ghee (naturally lactose-free — can be included)"],
+      "bannerText": "LACTOSE INTOLERANCE ACTIVE: All meal suggestions in this report are dairy-free. Paneer, regular curd, milk, and Greek yogurt replaced with lactose-free alternatives."
+    }
+  ],
+
+  "shift_work_rules": [
+    {
+      "id": "shift_work_detected",
+      "condition": "workSchedule includes 'shift' OR workSchedule includes 'night' OR workSchedule includes 'rotating'",
+      "action": "add_shift_sleep_protocol",
+      "protocol": [
+        "Anchor: always sleep 7–8 hours IMMEDIATELY after shift ends, regardless of time",
+        "Light therapy: 20 min bright light (10,000 lux) at shift START",
+        "Melatonin 0.5–1mg 30 min before sleep window",
+        "Keep sleep room completely dark (blackout curtains mandatory)",
+        "Maintain same 'pre-sleep routine' regardless of time of day",
+        "Eat main meal at shift START — avoid heavy meals in last 2 hours of shift"
+      ],
+      "bannerText": "SHIFT WORK PROTOCOL: Standard sleep timing advice does not apply to you. Follow the shift-specific circadian anchoring protocol."
+    }
+  ],
+
+  "addon_gender_mismatch_rules": [
+    {
+      "id": "male_gets_female_addon",
+      "condition": "gender=male AND addon includes 'women_hormone' OR addon includes 'women_hormonal'",
+      "action": "reject",
+      "message": "Women's Hormonal Health add-on is not applicable for male profiles."
+    },
+    {
+      "id": "female_gets_male_addon",
+      "condition": "gender=female AND addon includes 'men_fitness' OR addon includes 'men_performance'",
+      "action": "reject",
+      "message": "Men's Performance Pack add-on is not applicable for female profiles."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+now see did you correct the inconsistencies. i have used genewell4 final b2b codes given by you10:42 PMScrutinized admin data against PDF report for discrepanciesScrutinized admin data against PDF report for discrepanciesKONIKAYA Report — Full Consistency Audit ✅
+✅ Fixes That Are Working (from our code)
+IssueStatusSleep target✅ 7-8 hrs nightly — FIXED and correctStress Mgmt Score header✅ Stress Mgmt Score: 45/100 — FIXED and consistent with dashboardRoot cause chain last node✅ Muscle Gain Blocked + Nutrient Deficit — FIXED for gain-weight userThyroid-specific supplement✅ Selenium + Zinc instead of generic Zinc — CorrectBloating in gut section✅ Addressed (bloatingFrequency: sometimes)Thyroid decision tree rule✅ Added IF thyroid condition row
+
+⚠️ Remaining Issues Found
+1. Section 08 header still shows raw stressScore (55) in narrative text:
+
+PDF page 11: "Your stress score of 55/100 suggests moderate stress"
+
+Header correctly shows 45/100 but the narrative body text still leaks the raw stressScore. Two different numbers on same page — user will notice.
+2. Activity Multiplier label still wrong:
+
+PDF page 5: BMR × 1.375 (Active) — Admin shows lightly-active
+
+The label fix worked in Section 02 metabolic steps block, but there appears to be a second location in the PDF that still renders "Active" — likely the cover page or a secondary metabolic section.
+3. Meals Per Day = 2, but Weight Projection unchanged:
+
+Admin: Meals: 2/day — PDF correctly flags this as CRITICAL (35/100) ✅
+But the 90-Day Weight Projection table shows same targets as a 3-meal user — no note that calorie targets assume meal frequency is fixed first.
+
+4. Gluten intolerance NOT addressed in meal plan/nutrition:
+
+Admin: Food Intolerances: gluten
+PDF cover lists it ✅ but gut section / nutrition section has no gluten-free food swaps mentioned. Idli/dosa (Week 3-4 gut protocol) contains gluten risk if atta-based.
+
+5. Shift Work schedule not integrated into sleep section:
+
+Admin: Work Schedule: shift-work
+PDF page 10: ✅ "Shift Worker Adaptations" section IS present — this is working correctly!
+
+
+📊 Score: 6/8 fixes confirmed working
+FixResultSleep target 7-8✅Stress Mgmt Score header✅Activity label⚠️ Partial (one location still shows "Active")Root cause chain✅Zinc gender-aware✅Bloating✅Salty cravings warning✅ (diabetes not present here, so correctly silent)Stress narrative body text (55)❌ Still leaking raw scoreGluten intolerance in meal plan❌ Missing
+Want me to fix these 2 remaining issues and deliver an updated zip?

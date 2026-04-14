@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Incomplete — Genewell</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #FFF5F5; color: #1F2937; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .card { background: white; border-radius: 16px; padding: 40px; text-align: center; max-width: 440px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    h1 { color: #DC2626; font-size: 1.4rem; margin-bottom: 12px; }
+    p { color: #4B5563; line-height: 1.6; }
+    .btn { display: inline-block; margin-top: 20px; padding: 12px 28px; background: #7C3AED; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>❌ Payment Not Completed</h1>
+    <p>Your payment for the add-on was not completed (status: <strong>{{ status }}</strong>).</p>
+    <p>Your existing wellness report has not been affected. Please try again.</p>
+    {% if order_id %}
+    <a href="/buy-addon/{{ slug }}/?order_id={{ order_id }}" class="btn">Try Again</a>
+    {% endif %}
+    <br>
+    <a href="/" class="btn" style="background:#6B7280; margin-left: 8px;">Back to Quiz</a>
+  </div>
+</body>
+</html>

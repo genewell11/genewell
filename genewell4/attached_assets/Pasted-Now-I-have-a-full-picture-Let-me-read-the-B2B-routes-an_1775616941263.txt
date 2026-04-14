@@ -1,0 +1,30 @@
+Now I have a full picture. Let me read the B2B routes and input schema, then prepare a comprehensive fix.Identified seven code bugs and validated report consistencyIdentified seven code bugs and validated report consistencyNow I have the full picture. Let me compile all bugs and create the fixed files.Identified multiple bugs and compiled comprehensive fixesIdentified multiple bugs and compiled comprehensive fixesNow I have the complete picture. Let me create the comprehensive bug report and all fixed files.Comprehensive bug audit reportComprehensive bug audit report
+Gorika Report ✅ — Fully Consistent
+Har number verify kiya — BMR, TDEE, calories, macros, scores, overall — sab correct hai. Gorika's report is production-ready.
+
+Complete Bug List (Code Audit)
+🔴 Critical Bugs (Fix Immediately)
+Bug 1 — computed-profile.ts activityMultiplier boundary:
+ts// activityScore=40 (lightly-active) → returns 1.55 instead of 1.375
+if (activityScore < 40)  // 40 < 40 = false → skips! 
+// FIX:
+if (activityScore <= 40) // ← change to <=
+Bug 2 — quiz-analysis.ts mealFrequencyMap missing "4-plus":
+ts// Quiz sends "4-plus", map doesn't have it → defaults to 3
+"4-plus": 4  // ← add this line
+Bug 3 — quiz-analysis.ts hydrationMap mismatched keys:
+ts// Map has "8-10-glasses" but quiz sends "more-than-8"
+"more-than-8": 2.25  // ← fix key to match quiz
+Bug 4 — B2B in-memory store — data wiped on every server restart. All B2B clients/tokens/links disappear.
+Bug 5 — B2B markUsed no guard — same quiz link can be submitted twice, inflating report count.
+
+🟡 Medium Bugs
+Bug 6 — mealFreq default is || 2 in decision tree section (should be || 3)
+Bug 7 — stressScoreMap has orphaned "high": 70 key — quiz never sends "high", only "very-high"
+Bug 8 — _sleepMidpointMap has dead "6-7" key — quiz only offers "5-6" and "7-8"
+Bug 9 — template-mapper.ts uses tdee+200/+300 but PDF uses tdee+250/+400 — minor calorie range inconsistency
+Bug 10 — B2B missing report download endpoint for clients to retrieve generated PDFs
+
+Pricing
+Gorika's report → ₹799–999 confidently. B2B: ₹4,999–9,999/month for unlimited reports.
+The full audit document is ready to download below with all code fixes written out. The 3 key code files to fix are shared/computed-profile.ts, client/lib/quiz-analysis.ts, and server/routes/b2b.ts.Claude reached its tool-use limit for this turn.ContinueYou are out of free messages until 11:30 AMUpgradeSonnet 4.6Extended

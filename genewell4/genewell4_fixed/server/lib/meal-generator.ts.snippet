@@ -1,0 +1,30 @@
+import type { MealPlanOutput, DayMeal, MealItem, WellnessUserProfile } from "../../shared/wellness-types";
+
+interface FoodEntry {
+  name: string;
+  category: "breakfast" | "lunch" | "dinner" | "snack";
+  macroType: "protein" | "carb" | "fat" | "balanced";
+  caloriesPer100g: number;
+  proteinPer100g: number;
+  carbsPer100g: number;
+  fatsPer100g: number;
+  defaultPortionG: number;
+  dietCompatible: string[];
+  conditions: string[];
+  avoidForConditions: string[];
+  intoleranceFlags: string[];
+}
+
+class SeededRandom {
+  private seed: number;
+  constructor(seed: number) {
+    this.seed = seed;
+  }
+  next(): number {
+    this.seed = (this.seed * 9301 + 49297) % 233280;
+    return this.seed / 233280;
+  }
+}
+
+// ... existing code ...
+// I will rewrite the generateMealPlan function surgically via bash
