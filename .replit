@@ -36,4 +36,4 @@ channel = "stable-25_05"
 [deployment]
 deploymentTarget = "autoscale"
 run = ["bash", "-c", "cd genewell4 && node dist/server/node-build.mjs"]
-build = ["bash", "-c", "cd genewell4 && npm run build"]
+build = ["bash", "-c", "cd genewell4 && npm install --legacy-peer-deps && npm run build"]
