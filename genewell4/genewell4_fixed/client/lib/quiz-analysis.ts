@@ -221,7 +221,7 @@ function generateInsights(profile: any, quizData: any): PersonalizationData["ins
   const activityLevel = quizData.activityLevel || "moderately-active";
 
   return {
-    metabolicInsight: `Based on exercise physiology research, your estimated resting metabolic rate (BMR) is ${profile.estimatedBMR} calories/day. With your ${activityLevel} activity level, your daily energy expenditure (TDEE) is approximately ${profile.estimatedTDEE} calories. This means eating at or around ${profile.estimatedTDEE} calories maintains your current weight; eat below this for fat loss, above this for muscle gain.`,
+    metabolicInsight: `Based on exercise physiology research, your estimated resting metabolic rate (BMR) is ${profile.estimatedBMR} calories/day. With your ${activityLevel} activity level, your daily energy expenditure (TDEE) is approximately ${profile.estimatedTDEE} calories. This means eating at or around ${profile.estimatedTDEE} calories maintains your current weight; eat below this for fat loss, above for muscle gain.`,
 
     recommendedMealTimes,
 
