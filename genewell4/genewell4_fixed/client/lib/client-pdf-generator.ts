@@ -118,36 +118,7 @@ export interface PDFGenerationOptions {
 }
 
 export async function generatePersonalizedPDFClient(personalizationData: PersonalizationData, options: PDFGenerationOptions) {
-  const pdf = new jsPDF();
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(18);
-  pdf.text("Genewell Personalized Blueprint", 20, 20);
-  pdf.setFontSize(12);
-  pdf.text(`Name: ${personalizationData.profile.name}`, 20, 32);
-  pdf.text(`Email: ${personalizationData.profile.email}`, 20, 40);
-  pdf.text(`Plan: ${options.tier}`, 20, 48);
-  pdf.text(`Language: ${options.language || "en"}`, 20, 56);
-
-  let y = 70;
-  pdf.setFontSize(14);
-  pdf.text("Insights", 20, y);
-  y += 10;
-  pdf.setFontSize(10);
-  const insightLines = pdf.splitTextToSize(personalizationData.insights.metabolicInsight, 170);
-  pdf.text(insightLines, 20, y);
-  y += insightLines.length * 5 + 8;
-
-  pdf.text("Recommended Meal Times:", 20, y);
-  y += 6;
-  personalizationData.insights.recommendedMealTimes.forEach((time) => {
-    pdf.text(`• ${time}`, 24, y);
-    y += 5;
-  });
-
-  return {
-    blob: pdf.output("blob"),
-    filename: `genewell-blueprint-${options.orderId}.pdf`,
-  };
+  return generatePersonalizedPDF(personalizationData, options);
 }
 
 export function downloadPDF(blob: Blob, filename: string) {
