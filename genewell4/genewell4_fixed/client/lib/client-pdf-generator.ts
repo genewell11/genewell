@@ -107,27 +107,12 @@ export interface PersonalizationData {
   insights: PersonalizationInsights;
 }
 
-export type { PersonalizationData as QuizPersonalizationData };
-
 export interface PDFGenerationOptions {
   tier: "free" | "essential" | "premium" | "coaching" | "subscription";
   addOns?: string[];
   orderId: string;
   timestamp: string;
   language?: "en" | "hi";
-}
-
-export async function generatePersonalizedPDFClient(personalizationData: PersonalizationData, options: PDFGenerationOptions) {
-  return generatePersonalizedPDF(personalizationData, options);
-}
-
-export function downloadPDF(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 // ══════════════════════════════════════════════════════════════
